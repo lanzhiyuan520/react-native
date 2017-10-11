@@ -48,7 +48,7 @@ export default class Action extends Component{
             <View>
                 {this.state.ready?
                 <FlatList
-                    numColumns="2"
+                    numColumns="3"
                     refreshing={this.state.load}
                     onRefresh={() => {
                         this.setState({refreshing: true})
@@ -83,18 +83,25 @@ export default class Action extends Component{
                     data={this.state.video}
                           renderItem={({item})=> {
                               return(
-                                  <TouchableWithoutFeedback onPress={() => this.props.navigate.navigate('Chat',
-                                      {img:item.value.images.large,actors:item.value.casts}
-                                      )}>
-                                  <View style={{marginBottom:20}}>
-                                      <View>
-                                          <Image source={{uri: item.value.images.large}} style={{width:150,height:200}}/>
+                                  <View style={{padding:5,borderColor:"#999",borderWidth:1,marginTop:5,borderRadius:3}}>
+                                      <TouchableWithoutFeedback onPress={() => this.props.navigate.navigate('Chat',
+                                          {img:item.value.images.large,
+                                              actors:item.value.casts,
+                                              name:item.value.title,
+                                              scoring:item.value.rating.average,
+                                              director:item.value.directors[0].name
+                                          }
+                                          )}>
+                                      <View style={{marginBottom:20}}>
+                                          <View>
+                                              <Image source={{uri: item.value.images.large}} style={{width:100,height:150}}/>
+                                          </View>
+                                          <View style={{flexDirection:"row",justifyContent:"center",width:100}}>
+                                              <Text numberOfLines={1}>{item.value.title}</Text>
+                                          </View>
                                       </View>
-                                      <View style={{flexDirection:"row",justifyContent:"center"}}>
-                                          <Text>{item.value.title}</Text>
-                                      </View>
+                                      </TouchableWithoutFeedback>
                                   </View>
-                                  </TouchableWithoutFeedback>
                                   )
                           }}
                 />:<Loading/>

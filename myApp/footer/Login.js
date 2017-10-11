@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry,Alert,ToastAndroid, Button,TextInput ,TouchableOpacity,TouchableNativeFeedback,TouchableHighlight,Image , StyleSheet, Text, View ,ScrollView} from 'react-native';
-import Game from "./myApp/footer/Game"
-export default class App extends Component {
-    static navigationOptions = {
-        title: 'Welcome',
-
-    };
+export default class Login extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -35,6 +30,7 @@ export default class App extends Component {
                     {text: '确定', onPress: () => console.log('OK Pressed')},
                 ],
                 { cancelable: false })*/
+
              ToastAndroid.show('请输入手机号', ToastAndroid.SHORT)
 
             return false
@@ -89,14 +85,12 @@ export default class App extends Component {
                         )*/
                         ToastAndroid.show('登录成功', ToastAndroid.SHORT)
                         this.setState({text:"",validation:""})
-                        this.jump()
+                        this.props.click()
+                        clearInterval(this.time)
                     }
                 }
             }
         }
-    }
-    jump(){
-        this.props.navigation.state.params.navigate.navigate("Game",{login:this.state.login})
     }
     service(){
        /* Alert.alert("温馨提示","暂时还没有服务条款！！！",  [
@@ -145,18 +139,18 @@ export default class App extends Component {
         }
         if(this.state.clear){
             this.setState({clear:false})
-            let time = setInterval(()=>{
+             this.time = setInterval(()=>{
                 this.setState({verify:this.state.count})
                 this.state.count=this.state.count-1
                 if(this.state.count<1){
                     this.setState({verify:this.state.once,liked:false,clear:true})
-                    clearInterval(time)
+                    clearInterval(this.time)
                 }
             },1000)
         }
     }
     render() {
-        let check = this.state.check?require("./img/checked2.png"):require("./img/checkbox.png")
+        let check = this.state.check?require("../../img/checked2.png"):require("../../img/checkbox.png")
         let once = this.state.liked?styles.once:styles.once1
         return (
             <View style={{backgroundColor:"#fff",paddingBottom:100}}>
@@ -243,16 +237,16 @@ export default class App extends Component {
 
                     <View style={{flexDirection:"row",justifyContent:"center"}}>
                         <View style={{width:335,flexDirection:"row",justifyContent:"center"}}>
-                            <TouchableNativeFeedback onPress={this.social}><Image source={require("./img/mm.png")}
+                            <TouchableNativeFeedback onPress={this.social}><Image source={require("../../img/mm.png")}
                                                                                   style={{width:45,height:45}}
                             /></TouchableNativeFeedback>
                             <TouchableNativeFeedback onPress={this.social}>
-                                <View><Image source={require("./img/qq.png")}
+                                <View><Image source={require("../../img/qq.png")}
                                              style={{width:45,height:45}}
                                 /></View>
                             </TouchableNativeFeedback>
                             <TouchableNativeFeedback onPress={this.social}>
-                                <View><Image source={require("./img/sinaweibo.png")}
+                                <View><Image source={require("../../img/sinaweibo.png")}
                                              style={{width:45,height:45}}
                                 /></View>
                             </TouchableNativeFeedback>

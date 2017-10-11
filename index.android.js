@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry,Alert,ToastAndroid, Button,TextInput ,TouchableOpacity,TouchableNativeFeedback,TouchableHighlight,Image , StyleSheet, Text, View ,ScrollView} from 'react-native';
-import Login from "./login"
+import Login from "./myApp/footer/Login"
 import MoviePage from "./myApp/footer/MoviePage"
 import MusicPage from "./myApp/footer/MusicPage"
 import BookPage from "./myApp/footer/BookPage"
